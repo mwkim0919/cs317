@@ -1,0 +1,117 @@
+=== Observed behaviour ===
+
+Describe in general words the observed behaviour of each of these servers and 
+how it affects the video playback experience. Then explain what you believe is
+happening and what is causing the described behaviour.
+
+* FUNKY A
+The video looks like it is being fast-forwarded from time to time. Maybe there are packets that has not been received.
+
+* FUNKY B
+The video looks like it is being fast-forwarded from time to time. Maybe there are missing packets. 
+
+* FUNKY C
+The video looks like it is going back and forth from time to time. Maybe packets are received out of order.
+
+* FUNKY D
+The video looks like it is going back and forth from time to time and the video is not played fluently.
+Maybe packets are received not in order and there might be missing packets as well.
+
+* FUNKY E
+The video is fast-forwarded.
+Maybe too many packets are processed at once.
+
+* FUNKY F
+The video is played in a slow-motion. 
+Maybe packets are received not on time meaning they are coming late.
+
+* FUNKY G
+The video is played in a slow-motion and the video is not played fluently.
+Maybe packets are received not on time meaning they are coming late and some of the packets may be missing.
+
+* FUNKY H
+The video gets chopped in the middle. 
+Maybe a huge number of packets is lost at once at a certain point of time.
+
+=== Statistics ===
+
+You may add additional columns with more relevant data.
+
+FUNKY SERVER | FRAME RATE | PACKET LOSS RATE | OUT OF ORDER | TIME TAKEN|     
+             | (pkts/sec) | (lost pkts/sec)  | (/sec)       |  (sec)    |     
+-------------+------------+------------------+--------------+-----------+     
+     A       |    23.05   |      2.62        |      0       |  19.48    |     
+     B       |    15.67   |      9.44        |      0       |  19.91    |     
+     C       |    25.02   |      0           |      0.009   |  19.98    |     
+     D       |    13.68   |      11.37       |      0.013   |  19.96    |     
+     E       |    47.67   |      52.05       |      0       |   5.01    |     
+     F       |    10.02   |      0           |      0       |  49.91    |     
+     G       |     8.14   |      1.88        |      0       |  49.90    |     
+     H       |    21.60   |      3.46        |      0       |  19.95    |     
+
+
+=== Result of analysis ===
+
+Explain in a few words what you believe is actually happening based on the statistics above.
+
+* FUNKY A
+There is a frequent packet loss.
+The rate of packet being received is 23.05 packet/sec and the rate of packet loss is 2.62 packet/sec
+===Possible explanation===
+The router is having consistent congestion problem and it decided to drop all packets in its queue.
+
+
+* FUNKY B
+There is a packet loss more frequently than FUNKY A server.
+The rate of packet being received is 15.67 packet/sec and the rate of packet loss is 9.44 packet/sec
+===Possible explanation===
+The router is having consistent congestion problem and it decided to drop all packets in its queue.
+
+
+* FUNKY C
+The packets are not coming in order and there is no packet loss.
+The rate of packet being received is 25.02 packet/sec.
+The frequency of packets that are not in order is 0.009
+===Possible explanation===
+Packets might be taking different route, causing them to arrive in different order.
+
+
+* FUNKY D
+The packets are not coming in order and there is packet loss as well.
+The rate of packet being received is 13.68 packet/sec and the rate of packet loss is 11.37 packet/sec.
+The frequency of packets that are not in order is 0.013
+===Possible explanation===
+Packets might be taking different route, causing them to arrive in different order.
+The router is having consistent congestion problem and it decided to drop all packets in its queue.
+
+
+* FUNKY E
+There is a burst of packets sent from the server.
+The rate of packet being received is 47.67 packet/sec and the rate of packet loss is 52.05 packet/sec.
+===Possible explanation===
+The incoming packets are processed faster than the speed that the movie should be played at.
+The router is having consistent congestion problem and it decided to drop all packets in its queue.
+
+
+* FUNKY F
+The incoming packets are received slower than the speed that the movie should be played at.
+The rate of packet being received is 10.02 packet/sec and there is no packet loss.
+===Possible explanation===
+Each packet has been queued for a certain period of time at a router before it is received and then processed.
+
+
+* FUNKY G
+The incoming packets are received slower than the speed that the movie should be played at and some of the packets are lost.
+The rate of packet being received is 8.14 packet/sec and the rate of packet loss is 1.88 packet/sec.
+===Possible explanation===
+Each packet has been queued for a certain period of time at a router before it is received and then processed.
+The router is having consistent congestion problem and it decided to drop all packets in its queue.
+
+
+* FUNKY H
+The packet loss is not as frequent as FUNKY A or FUNKY B server however there is large number of packets lost at once.
+The rate of packet being received is 21.60 packet/sec and the rate of packet loss is 3.46 packet/sec.
+===Possible explanation===
+The router is having consistent congestion problem and it decided to drop all packets in its queue.
+Another explanation can be, a large number of packets is lost at once. A large number of packets may have been queued and dropped. 
+After the router queue has been cleared, the router will send each of the packets at a consistent rate.
